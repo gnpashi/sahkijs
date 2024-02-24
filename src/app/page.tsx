@@ -1,7 +1,7 @@
-import Search from "./components/search";
-import NavBar from "./components/navbar";
-import GameList from "./components/gamelist";
-import { getGames } from "./utils";
+import Search from "@/app/components/search";
+import NavBar from "@/app/components/navbar";
+import GameList from "@/app/components/gamelist";
+import { getGames } from "@/app/utils";
 
 export default async function Home() {
   const games = await getGames();
