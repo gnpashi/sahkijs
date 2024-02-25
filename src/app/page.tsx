@@ -2,7 +2,7 @@ import Search from "@/app/components/search";
 import GameList from "@/app/components/gamelist";
 import { getGames } from "@/app/utils";
 import { IGame } from "@/types";
-
+export const dynamic = "force-dynamic";
 export default async function Home() {
   const games: IGame[] = (await getGames()) as unknown as IGame[];
   let times: string[] = [];
