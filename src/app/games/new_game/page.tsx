@@ -1,15 +1,7 @@
 "use client";
+import { Game } from "@/types";
 import React, { useEffect, useState } from "react";
 
-interface Game {
-  id: string;
-  name: string;
-  description: string;
-  instructions: string;
-  time: string;
-  numPeople: string;
-  tags: string[];
-}
 const GameForm = () => {
   const [formData, setFormData] = useState({
     name: "",

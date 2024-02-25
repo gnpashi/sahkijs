@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { ClockIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { Game, GameProps } from "@/types";
 
-export default function game({ game }) {
+export default function GameComponent({ game }: GameProps) {
   const [isOpen, setOpen] = useState(false);
   function openGame() {
     setOpen(!isOpen);
