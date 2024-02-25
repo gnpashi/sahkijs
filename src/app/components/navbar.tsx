@@ -5,19 +5,27 @@ import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setOpen] = useState(false);
-  function openNav() {
+  function toggleNav() {
     setOpen(!isOpen);
   }
+  function closeNav() {
+    setOpen(false);
+  }
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-blue-500 p-6">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
-        <Link href="/" className="font-semibold text-xl tracking-tight">
+        <Link
+          onClick={closeNav}
+          href="/"
+          className="font-semibold text-xl tracking-tight"
+        >
           שחקי
         </Link>
       </div>
       <div className="block lg:hidden">
         <button
-          onClick={openNav}
+          onClick={toggleNav}
           className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
         >
           <svg
@@ -36,31 +44,12 @@ export default function Navbar() {
       >
         <div className="text-sm lg:flex-grow">
           <Link
+            onClick={closeNav}
             href="/games/new_game"
             className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
           >
             New Game
           </Link>
-          <Link
-            href="#responsive-header"
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Examples
-          </Link>
-          <Link
-            href="#responsive-header"
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
-          >
-            Blog
-          </Link>
-        </div>
-        <div>
-          <a
-            href="#"
-            className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-          >
-            Download
-          </a>
         </div>
       </div>
     </nav>

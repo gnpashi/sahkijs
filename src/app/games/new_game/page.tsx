@@ -1,8 +1,10 @@
 "use client";
 import { IGame } from "@/types";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const GameForm = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -59,17 +61,18 @@ const GameForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form data submitted:", formData);
-    // const res = await fetch("/api/new_game", {
-    //   method: "POST", // Specify the method
-    //   headers: {
-    //     // Headers are important to indicate the type of content you're sending
-    //     "Content-Type": "application/json",
-    //     // Add any other necessary headers
-    //   },
-    //   body: JSON.stringify(formData),
-    // });
-    // const game = await res.json();
-    // console.log(game);
+    const res = await fetch("/api/new_game", {
+      method: "POST", // Specify the method
+      headers: {
+        // Headers are important to indicate the type of content you're sending
+        "Content-Type": "application/json",
+        // Add any other necessary headers
+      },
+      body: JSON.stringify(formData),
+    });
+    const game = await res.json();
+    console.log(game);
+    router.push("/");
   };
 
   return (

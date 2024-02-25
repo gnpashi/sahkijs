@@ -15,4 +15,5 @@ async function handler(req: NextRequest, res: NextResponse) {
     return NextResponse.json("error", { status: 200 });
   }
 }
+
 export { handler as GET };
