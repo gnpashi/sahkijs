@@ -1,10 +1,10 @@
 import Search from "@/app/components/search";
-import NavBar from "@/app/components/navbar";
 import GameList from "@/app/components/gamelist";
 import { getGames } from "@/app/utils";
+import { IGame } from "@/types";
 
 export default async function Home() {
-  const games = await getGames();
+  const games: IGame[] = (await getGames()) as unknown as IGame[];
   let times: string[] = [];
   let numPeoples: string[] = [];
   let tags: string[] = [];
@@ -23,7 +23,6 @@ export default async function Home() {
   });
   return (
     <main>
-      <NavBar />
       <Search times={times} numPeoples={numPeoples} tags={tags} />
       <GameList games={games} />
     </main>

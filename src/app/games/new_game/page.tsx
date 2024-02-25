@@ -1,5 +1,5 @@
 "use client";
-import { Game } from "@/types";
+import { IGame } from "@/types";
 import React, { useEffect, useState } from "react";
 
 const GameForm = () => {
@@ -18,7 +18,7 @@ const GameForm = () => {
       const games = await res.json();
 
       let tags: string[] = [];
-      games.map((game: Game) => {
+      games.map((game: IGame) => {
         if (game.tags && game.tags.length > 0) {
           game.tags.map((tag: string) => {
             if (!tags.includes(tag)) {
