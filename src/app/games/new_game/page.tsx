@@ -1,6 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
+interface Game {
+  id: string;
+  name: string;
+  description: string;
+  instructions: string;
+  time: string;
+  numPeople: string;
+  tags: string[];
+}
 const GameForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -17,7 +26,7 @@ const GameForm = () => {
       const games = await res.json();
 
       let tags: string[] = [];
-      games.map((game) => {
+      games.map((game: Game) => {
         if (game.tags && game.tags.length > 0) {
           game.tags.map((tag: string) => {
             if (!tags.includes(tag)) {
@@ -31,36 +40,44 @@ const GameForm = () => {
     getTags();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSelectChange = (e) => {
-    const { options } = e.target;
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { options, name } = e.target;
     const value = [];
     for (let i = 0, l = options.length; i < l; i++) {
       if (options[i].selected) {
         value.push(options[i].value);
       }
     }
-    setFormData({ ...formData, tags: value });
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form data submitted:", formData);
-    const res = await fetch("/api/new_game", {
-      method: "POST", // Specify the method
-      headers: {
-        // Headers are important to indicate the type of content you're sending
-        "Content-Type": "application/json",
-        // Add any other necessary headers
-      },
-      body: JSON.stringify(formData),
-    });
-    const game = await res.json();
-    console.log(game);
+    // const res = await fetch("/api/new_game", {
+    //   method: "POST", // Specify the method
+    //   headers: {
+    //     // Headers are important to indicate the type of content you're sending
+    //     "Content-Type": "application/json",
+    //     // Add any other necessary headers
+    //   },
+    //   body: JSON.stringify(formData),
+    // });
+    // const game = await res.json();
+    // console.log(game);
   };
 
   return (
@@ -99,7 +116,7 @@ const GameForm = () => {
             id="description"
             name="description"
             value={formData.description}
-            onChange={handleInputChange}
+            onChange={handleTextAreaChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
@@ -116,7 +133,7 @@ const GameForm = () => {
             id="instructions"
             name="instructions"
             value={formData.instructions}
-            onChange={handleInputChange}
+            onChange={handleTextAreaChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
@@ -138,7 +155,7 @@ const GameForm = () => {
             required
           >
             {/* Populate these options with the appropriate times */}
-            <option value="">Select time...</option>
+            <option value=""></option>
             <option value="15">15 min</option>
             <option value="30">30 min</option>
             {/* ... other options ... */}
@@ -160,6 +177,8 @@ const GameForm = () => {
             className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
           >
+            <option value=""></option>
+
             <option value="1-5">1-5</option>
             <option value="5-10">5-10</option>
             <option value="5-10">10+</option>
