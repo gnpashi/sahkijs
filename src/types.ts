@@ -17,3 +17,9 @@ export interface IGameProps {
 export interface IGameListProps {
   games: IGame[];
 }
+
+export interface ISearchProps {
+  times: string[];
+  numPeoples: string[];
+  tags: string[];
+}

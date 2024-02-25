@@ -1,11 +1,12 @@
 "use client";
+import { ISearchProps } from "@/types";
 import {
   MagnifyingGlassIcon,
   ChevronUpIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
-export default function Search({ times, numPeoples, tags }) {
+export default function Search({ times, numPeoples, tags }: ISearchProps) {
   const [isOpen, setOpen] = useState(false);
   function openSearch() {
     setOpen(!isOpen);
